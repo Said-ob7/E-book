@@ -1,0 +1,12 @@
+﻿@model Models.ChapitreViewModel
+
+<h2>Chapter Details</h2>
+
+<div>
+    <h3>@Model.Titre</h3>
+    <p>@Model.Contenu</p>
+</div>
+
+<div>
+    <a asp-action="Details" asp-controller="Book" asp-route-id="@Model.LivreId">Back to Book Details</a>
+</div>

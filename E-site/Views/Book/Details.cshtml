@@ -1,0 +1,21 @@
+﻿@model Models.Livre.LivreDetailsVM
+
+
+<div>
+    <h3>@Model.Titre</h3>
+    <br />
+    <img src="~/images/@(@Model.Couverture + ".jpg")" alt="Book Cover" />
+    <p>@Model.Description</p>
+
+    <h4>Chapters:</h4>
+    <ul>
+        @foreach (var chapitre in Model.Chapitres)
+        {
+                <li>
+                    <a href="@Url.Action("ChapterDetails", "Book", new { livreId = Model.LivreId, chapitreId = chapitre.ChapitreId })">
+                    @chapitre.Titre
+                    </a>
+                </li>
+        }
+    </ul>
+</div>
