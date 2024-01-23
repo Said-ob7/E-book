@@ -5,13 +5,28 @@
 namespace DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class createdatabasemigration : Migration
+    public partial class CreateDatabaseMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
                 name: "dbo");
+
+            migrationBuilder.CreateTable(
+                name: "T_Genre",
+                schema: "dbo",
+                columns: table => new
+                {
+                    GenreId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nom = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_T_Genre", x => x.GenreId);
+                });
 
             migrationBuilder.CreateTable(
                 name: "T_Livre",
@@ -22,11 +37,19 @@ namespace DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Titre = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    Couverture = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                    Couverture = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    GenreId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_T_Livre", x => x.LivreId);
+                    table.ForeignKey(
+                        name: "FK_T_Livre_T_Genre_GenreId",
+                        column: x => x.GenreId,
+                        principalSchema: "dbo",
+                        principalTable: "T_Genre",
+                        principalColumn: "GenreId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,6 +109,12 @@ namespace DAL.Migrations
                 schema: "dbo",
                 table: "T_Chapitre",
                 column: "LivreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_T_Livre_GenreId",
+                schema: "dbo",
+                table: "T_Livre",
+                column: "GenreId");
         }
 
         /// <inheritdoc />
@@ -101,6 +130,10 @@ namespace DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "T_Livre",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "T_Genre",
                 schema: "dbo");
         }
     }

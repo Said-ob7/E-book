@@ -6,7 +6,8 @@
     <br />
     <img src="~/images/@(@Model.Couverture + ".jpg")" alt="Book Cover" />
     <p>@Model.Description</p>
-
+    <p>@Model.Chapitres.Count()</p>
+    <p>@Model.Genre.Nom</p>
     <h4>Chapters:</h4>
     <ul>
         @foreach (var chapitre in Model.Chapitres)

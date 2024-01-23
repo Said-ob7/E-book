@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240117215326_createdatabasemigration")]
-    partial class createdatabasemigration
+    [Migration("20240123195019_CreateDatabaseMigration")]
+    partial class CreateDatabaseMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,6 +78,29 @@ namespace DAL.Migrations
                     b.ToTable("T_Chapitre", "dbo");
                 });
 
+            modelBuilder.Entity("DAL.Entity.Genre", b =>
+                {
+                    b.Property<int>("GenreId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GenreId"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("GenreId");
+
+                    b.ToTable("T_Genre", "dbo");
+                });
+
             modelBuilder.Entity("DAL.Entity.Livre", b =>
                 {
                     b.Property<int>("LivreId")
@@ -96,12 +119,17 @@ namespace DAL.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Titre")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("LivreId");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("T_Livre", "dbo");
                 });
@@ -126,6 +154,22 @@ namespace DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Livre");
+                });
+
+            modelBuilder.Entity("DAL.Entity.Livre", b =>
+                {
+                    b.HasOne("DAL.Entity.Genre", "Genre")
+                        .WithMany("Livres")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("DAL.Entity.Genre", b =>
+                {
+                    b.Navigation("Livres");
                 });
 
             modelBuilder.Entity("DAL.Entity.Livre", b =>

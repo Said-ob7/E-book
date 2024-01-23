@@ -9,7 +9,9 @@ namespace DAL
 		public DbSet<Chapitre> Chapitres { get; set; }
 		public DbSet<Livre> Livres { get; set; }
 
-		public MyDbContext() { }
+        public DbSet<Genre> Genres { get; set; }
+
+        public MyDbContext() { }
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			// Update the connection string based on your database server
