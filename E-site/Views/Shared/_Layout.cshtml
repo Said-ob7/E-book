@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/E_site.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -44,6 +47,7 @@
 
 
 <style>
+    
         body {
             margin: 0;
             font-family: 'Oswald', sans-serif;
@@ -64,8 +68,9 @@
 
         .container-fluid {
             display: flex;
-            justify-content: space-between;
+            gap:50px;
             align-items: center;
+            justify-content: center;
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
@@ -87,7 +92,8 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: space-between;
+            flex-direction: row;
+            gap:50px;
             width: 200px; /* Adjust the width as needed */
         }
 

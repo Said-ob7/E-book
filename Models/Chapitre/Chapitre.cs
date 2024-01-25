@@ -8,7 +8,9 @@ namespace Models
 {
 	public class ChapitreViewModel
 	{
-		public int ChapitreId { get; set; }
+        
+
+        public int ChapitreId { get; set; }
 		public int LivreId { get; set; }
 		public string Titre { get; set; } = string.Empty;
 		public string Contenu { get; set; } = string.Empty;

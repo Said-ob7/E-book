@@ -1,0 +1,14 @@
+﻿@model string[]
+
+@if (Model != null && Model.Any())
+{
+        <div>
+            <h4>Genres:</h4>
+            <ul>
+            @foreach (var genre in Model)
+            {
+                        <li>@genre</li>
+            }
+            </ul>
+        </div>
+}

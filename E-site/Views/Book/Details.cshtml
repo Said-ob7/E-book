@@ -1,22 +1,113 @@
-﻿@model Models.Livre.LivreDetailsVM
+﻿    @model Models.Livre.LivreDetailsVM
 
 
-<div>
-    <h3>@Model.Titre</h3>
-    <br />
-    <img src="~/images/@(@Model.Couverture + ".jpg")" alt="Book Cover" />
-    <p>@Model.Description</p>
-    <p>@Model.Chapitres.Count()</p>
-    <p>@Model.Genre.Nom</p>
-    <h4>Chapters:</h4>
-    <ul>
-        @foreach (var chapitre in Model.Chapitres)
-        {
-                <li>
-                    <a href="@Url.Action("ChapterDetails", "Book", new { livreId = Model.LivreId, chapitreId = chapitre.ChapitreId })">
-                    @chapitre.Titre
-                    </a>
-                </li>
-        }
-    </ul>
-</div>
+    <div>
+        <div class="Book">
+            <div class="cover">
+                <img src="~/images/@(@Model.Couverture + ".jpg")" alt="Book Cover" />
+            </div>
+            <div class="about_b">
+                <h2>@Model.Titre</h2>
+                <p>@Model.Description</p>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>
+                    @Model.Chapitres.Count()
+                </p>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 32C0 14.3 14.3 0 32 0H160c17.7 0 32 14.3 32 32V416c0 53-43 96-96 96s-96-43-96-96V32zM223.6 425.9c.3-3.3 .4-6.6 .4-9.9V154l75.4-75.4c12.5-12.5 32.8-12.5 45.3 0l90.5 90.5c12.5 12.5 12.5 32.8 0 45.3L223.6 425.9zM182.8 512l192-192H480c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32H182.8zM128 64H64v64h64V64zM64 192v64h64V192H64zM96 440a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/></svg>
+                    @Model.Genre.Nom
+                </p>
+            </div>
+        </div>
+    
+       <div class="Chap">
+           <div class="Chap_center">
+                <div class="Chap_title">
+                    <h3>Chapters</h3>
+                </div>
+               <div class="Chap_list">
+                    <ul>
+                        @foreach (var chapitre in Model.Chapitres)
+                        {
+                            <li>
+                                <a href="@Url.Action("ChapterDetails", "Book", new { livreId = Model.LivreId, chapitreId = chapitre.ChapitreId })">
+                                    @chapitre.Titre
+                                </a>
+                            </li>
+                        }
+                    </ul>
+               </div>
+           </div>
+       </div>
+    
+    </div>
+   <style>
+    .Book {
+        background-color: #f5f6fc;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 50px;
+    }
+
+    .cover {
+        margin: 20px;
+        height: 400px;
+        position: relative;
+        object-fit: contain;
+    }
+
+    .cover img {
+        border-radius: 15px;
+        object-fit: cover;
+        height: 100%;
+    }
+
+    .about_b {
+        max-width: 500px;
+        margin: 20px;
+    }
+
+    .about_b svg {
+        height: 20px;
+    }
+
+    .Chap {
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    .Chap_center {
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        width: 850px;
+        gap: 20px;
+    }
+
+    .Chap_list ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+
+    }
+
+    .Chap_list ul li {
+  
+        box-sizing: border-box;
+        width: 300px;
+        height:40px;
+        border-bottom: 1px solid #d7d8e0;
+    }
+
+    .Chap_list ul li a {
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+        
+    }
+</style>
+
+    </style>
