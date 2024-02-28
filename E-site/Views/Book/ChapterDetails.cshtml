@@ -2,6 +2,7 @@
 @{
     int nextChapterId = Model.ChapitreId + 1;
     int previousChapterId = Model.ChapitreId - 1;
+
 }
 <div class="URL">
     <div class="URL_cont">
@@ -27,8 +28,16 @@
    
 </div>
 <div class="Chapter_control">
-        <a class="button" asp-action="ChapterDetails" asp-controller="Book" asp-route-livreId="@Model.LivreId" asp-route-chapitreId="@nextChapterId">Next Chapter</a>
+    @if(Model.ChapitreId > 1)
+    {
         <a class="button" asp-action="ChapterDetails" asp-controller="Book" asp-route-livreId="@Model.LivreId" asp-route-chapitreId="@previousChapterId">Previous Chapter</a>
+        <a class="button" asp-action="ChapterDetails" asp-controller="Book" asp-route-livreId="@Model.LivreId" asp-route-chapitreId="@nextChapterId">Next Chapter</a>
+    }
+    else
+    {
+        <a class="button" asp-action="ChapterDetails" asp-controller="Book" asp-route-livreId="@Model.LivreId" asp-route-chapitreId="@nextChapterId">Next Chapter</a>
+    }
+
 </div>
     
 

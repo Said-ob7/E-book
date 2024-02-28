@@ -52,16 +52,7 @@ namespace DAL.Repos
                 }
             }
         }
-        public List<Livre> GetBooksByGenre(int genreId)
-        {
-            using (MyDbContext mydb = new MyDbContext())
-            {
-                return mydb.Livres
-                    .Where(book => book.Genre.GenreId == genreId)
-                    .Include(book => book.Genre) // Include the Genre navigation property
-                    .ToList();
-            }
-        }
+        
        
     }
 }

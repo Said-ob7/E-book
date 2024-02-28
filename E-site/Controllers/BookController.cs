@@ -24,12 +24,11 @@ namespace E_site.Controllers
         // GET: Book/Details/5
         public ActionResult Details(int id)
         {
-            // Fetch the book details by ID
             var bookDetails = _livreService.GetBookDetails(id);
 
             if (bookDetails == null)
             {
-                return NotFound(); // Return a 404 Not Found if the book is not found
+                return NotFound(); 
             }
 
             return View(bookDetails);
@@ -40,7 +39,7 @@ namespace E_site.Controllers
 
             if (chapterDetails == null)
             {
-                return NotFound(); // Or handle the case where the chapter is not found
+                return NotFound(); 
             }
 
             return View(chapterDetails);

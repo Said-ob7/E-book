@@ -40,7 +40,6 @@ namespace BLL
 
             if (livreEntity == null)
             {
-                // Handle case where the book is not found
                 return null;
             }
 
@@ -59,7 +58,6 @@ namespace BLL
                 chapitres.Add(chapitreViewModel);
             }
 
-            // Fetch the Genre information
             DAL.Entity.Genre genreEntity = genreRepos.Read(livreEntity.GenreId);
 
             GenreViewModel genreViewModel = new GenreViewModel
@@ -89,7 +87,6 @@ namespace BLL
 
             if (chapitreEntity == null || chapitreEntity.LivreId != livreId)
             {
-                // Handle the case where the chapter is not found or not associated with the given book
                 return null;
             }
 
@@ -103,24 +100,7 @@ namespace BLL
 
             return chapitreViewModel;
         }
-        public List<LivreViewModel> GetBooksByGenre(int genreId)
-        {
-            LivreRepos livreRepos = new LivreRepos();
-
-            // Assuming you have a method in LivreRepos to get books by genre
-            var booksByGenre = livreRepos.GetBooksByGenre(genreId);
-
-            var bookViewModels = booksByGenre.Select(bookEntity => new LivreViewModel
-            {
-                LivreId = bookEntity.LivreId,
-                Titre = bookEntity.Titre,
-                Description = bookEntity.Description,
-                Couverture = bookEntity.Couverture,
-                // Add other properties as needed
-            }).ToList();
-
-            return bookViewModels;
-        }
+        
         
     }
 }

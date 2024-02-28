@@ -21,7 +21,7 @@ namespace DAL.Entity
         [MaxLength(1000)]
         public string Description { get; set; } = string.Empty;
 
-        // Remove the foreign key attribute from Livres collection
+       
         public ICollection<Livre> Livres { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace DAL.Entity
 
         [MaxLength(200)]
         public string Couverture { get; set; } = string.Empty;
-        public ICollection<Chapitre> Chapitres { get; set; }  // Ensure the property name is Chapitres
+        public ICollection<Chapitre> Chapitres { get; set; }  
 
         [ForeignKey("GenreId")]
         public Genre Genre { get; set; }
