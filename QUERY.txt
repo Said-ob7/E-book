@@ -1,0 +1,50 @@
+use [E-book];
+-- Add genres
+INSERT INTO T_Genre (Nom, Description)
+VALUES 
+    ('Action', 'Books filled with action'),
+    ('Philosophy', 'Books exploring philosophical concepts'),
+    ('Adventure', 'Books with exciting adventures');
+
+-- Get genre IDs
+DECLARE @ActionGenreId INT, @PhilosophyGenreId INT, @AdventureGenreId INT;
+SELECT 
+    @ActionGenreId = GenreId 
+FROM 
+    T_Genre 
+WHERE 
+    Nom = 'Action';
+
+SELECT 
+    @PhilosophyGenreId = GenreId 
+FROM 
+    T_Genre 
+WHERE 
+    Nom = 'Philosophy';
+
+SELECT 
+    @AdventureGenreId = GenreId 
+FROM 
+    T_Genre 
+WHERE 
+    Nom = 'Adventure';
+
+-- Add books
+INSERT INTO T_Livre (Titre, Description, Couverture, GenreId)
+VALUES 
+    ('The Cold Storm', 'Book one in this new action-packed thriller series introduces us to Sergeant Roger O Neil, former U.S. Army Ranger and Veteran of the war in Afghanistan. After years of fighting terrorism abroad, he returns to Montana just to find that home is no longer the safe haven he once thought it was.Perfect for fans of Jack Reacher, Jack Ryan, or Jason Bourne.', 'The_cold_storm', @ActionGenreId),
+    ('How To Think Like A Roman Emperor', 'How to Think Like a Roman Emperor takes readers on a transformative journey along with Marcus, following his progress from a young noble at the court of Hadrian―taken under the wing of some of the finest philosophers of his day―through to his reign as emperor of Rome at the height of its power.', 'How_to_think_like_a_roman_emperor', @PhilosophyGenreId),
+    ('The Chronicles Of Narnia', 'During the World War II bombings of London, four English siblings are sent to a country house where they will be safe. One day Lucy (Georgie Henley) finds a wardrobe that transports her to a magical world called Narnia. After coming back, she soon returns to Narnia with her brothers, Peter (William Moseley) and Edmund (Skandar Keynes), and her sister, Susan (Anna Popplewell). There they join the magical lion, Aslan (Liam Neeson), in the fight against the evil White Witch, Jadis (Tilda Swinton).', 'The_chronicles_of_narnia', @AdventureGenreId),
+    ('The Imperfections Of My Life', 'Like the title suggest this book celebrates the imperfections of my life expressed as my musings. A collection of my musings and includes various poems, proses (fiction and non-fiction), and personal essays; all that will remind you of a similar emotion, striking a familiar chord.', 'The_Imperfections_Of_My_Life', @PhilosophyGenreId),
+('The Hunger Games', 'The Hunger Games is a 2008 dystopian young adult novel by the American writer Suzanne Collins. It is written in the perspective of 16-year-old Katniss Everdeen, who lives in the future, post-apocalyptic nation of Panem in North America. The Capitol, a highly advanced metropolis, exercises political control over the rest of the nation. The Hunger Games is an annual event in which one boy and one girl aged 12–18 from each of the twelve districts surrounding the Capitol are selected by lottery to compete in a televised battle royale to the death.', 'The_Hunger_Games', @ActionGenreId),
+('Into The Wild', 'Jon Krakauer s Into the Wild examines the true story of Chris McCandless, a young man who walked deep into the Alaskan wilderness and whose SOS note and emaciated corpse were found four months later.', 'Into_The_Wild', @AdventureGenreId);
+
+use [E-book]
+DECLARE @LivreId INT = 9;
+
+-- Inserting sample chapters for the book 'The Imperfections Of Memory'
+INSERT INTO T_Chapitre (LivreId, Titre, Contenu)
+VALUES
+    (@LivreId, 'Chapter 3', 'Content of Chapter 3...'),
+    (@LivreId, 'Chapter 4', 'Content of Chapter 4...');
+	select * from T_Chapitre;
